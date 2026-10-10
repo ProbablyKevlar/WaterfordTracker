@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  waterford-tracker:
+    build: .
+    container_name: waterford_track_tracker
+    restart: unless-stopped
+    ports:
+      - "8501:8501"
+    volumes:
+      # Persistent SQLite database storage on host
+      # On Synology NAS, map to e.g. /volume1/docker/waterford_tracker/data:/app/data
+      - ./data:/app/data
+    environment:
+      - COACH_USERNAME=coach
+      - COACH_PASSWORD=waterford2026
+      - COACH_NAME=Coach Waterford
+      - DB_DIR=/app/data
+      - DB_PATH=/app/data/waterford_tracker.db
